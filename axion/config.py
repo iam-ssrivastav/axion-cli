@@ -14,7 +14,7 @@ DEFAULT_CONFIG_FILE = DEFAULT_CONFIG_DIR / "config.yaml"
 
 # Default models per provider
 DEFAULT_MODELS = {
-    "ollama": "llama3.1",
+    "ollama": "llama3.1:8b",
     "gemini": "gemini-2.0-flash",
     "groq": "llama-3.1-70b-versatile",
     "openai": "gpt-4o-mini",
@@ -53,7 +53,7 @@ class Config:
 
     def __post_init__(self):
         if self.model is None:
-            self.model = DEFAULT_MODELS.get(self.provider, "llama3.1")
+            self.model = DEFAULT_MODELS.get(self.provider, "llama3.1:8b")
         if self.base_url is None and self.provider in DEFAULT_BASE_URLS:
             self.base_url = DEFAULT_BASE_URLS[self.provider]
 

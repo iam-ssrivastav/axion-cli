@@ -49,7 +49,7 @@ brew install ollama    # macOS
 
 # Start Ollama & pull a model
 ollama serve
-ollama pull llama3.1
+ollama pull llama3.1:8b
 
 # Run Axion
 axion
@@ -126,11 +126,27 @@ Axion has built-in tools that the AI can use:
 
 ## ⚙️ Configuration
 
-Config is stored at `~/.axion/config.yaml`:
+You can easily configure Axion via the built-in `config` commands:
+
+```bash
+# Show your current completely local setup
+axion config show
+
+# Set your default AI provider
+axion config set provider ollama 
+
+# Change your default model
+axion config set model llama3.1:8b
+
+# Change settings
+axion config set theme light
+```
+
+Config is stored in a clean YAML format at `~/.axion/config.yaml`:
 
 ```yaml
 provider: ollama
-model: llama3.1
+model: llama3.1:8b
 temperature: 0.1
 max_tokens: 8192
 theme: dark
