@@ -30,23 +30,25 @@ class TerminalUI:
 
     def show_banner(self):
         """Display the startup banner."""
-        banner_text = Text()
-        banner_text.append("  ⚛  ", style=f"bold {self.theme['primary']}")
-        banner_text.append("A", style=f"bold {self.theme['primary']}")
-        banner_text.append("X", style=f"bold {self.theme['secondary']}")
-        banner_text.append("I", style=f"bold {self.theme['accent']}")
-        banner_text.append("O", style=f"bold {self.theme['success']}")
-        banner_text.append("N", style=f"bold {self.theme['info']}")
-        banner_text.append(f"  v{__version__}", style=f"{self.theme['muted']}")
-
+        ascii_art = r"""
+    ___   _  __ ______ ____   _  __
+   / _ | | |/_//_  __// __ \ | |/ /
+  / __ | _>  <   / /  / /_/ / |   / 
+ /_/ |_|/_/|_|  /_/   \____/  |_|/  
+"""
+        banner_text = Text(ascii_art, style=f"bold {self.theme['primary']}")
+        
+        # Add sub-text
+        tagline = Text(f"\nv{__version__} | Free & Open Source AI Coding Assistant", style=f"{self.theme['muted']}")
+        
         self.console.print()
         self.console.print(
             Panel(
-                banner_text,
-                subtitle=f"[{self.theme['muted']}]Free & Open Source AI Coding Assistant[/]",
+                Text.assemble(banner_text, tagline),
                 border_style=self.theme["primary"],
                 box=box.DOUBLE_EDGE,
-                padding=(0, 2),
+                padding=(1, 4),
+                expand=False
             )
         )
 
